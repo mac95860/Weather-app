@@ -1,0 +1,89 @@
+* {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+
+
+
+/* ------------------------------header-------------------------------------- */
+.jumbotron {
+    background-color: rgb(46, 44, 44);
+    padding: 10px;
+    margin: 0;
+}
+
+h1{
+    text-align: center;
+    color: white;
+}
+
+/* ------------------------------Search Card---------------------------------- */
+
+.box{
+    display: flex;
+}
+
+.citySearch{
+    background: rgb(218, 218, 218);
+    padding: 10px;
+    padding-left: 10px;
+    margin-left: 0;
+    width: 30%;
+    height: 75vh;
+}
+
+label {
+    color:Black;
+    font-weight: bold;
+    font-size: larger;
+}
+
+/* ------------------------------Weather Info---------------------------------- */
+
+.box2{
+    display: flex;
+    flex-direction: column;
+    padding: 0;
+    margin: 0;
+    margin-left: 20px;
+    width: 70%;
+}
+
+.weatherInfo{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    margin-top: 15px;
+    margin-left: 0;
+    width: 100%;
+    height: 60%;
+    border-top: solid 1px  rgb(218, 218, 218);
+    border-left: solid 1px  rgb(218, 218, 218);
+    border-bottom: solid 1px  rgb(218, 218, 218);
+    border-radius: 10px;
+}
+
+h2 {
+    margin-left: 20px;
+}
+
+.specifics{
+    margin-left: 40px;
+    margin-right: 0;
+}
+
+.forecast{
+    margin-top: 15px;
+    width: 100%;
+    height: 40%;
+}
+
+
+
+
+
+
+
+
+ 

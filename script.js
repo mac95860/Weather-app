@@ -1,0 +1,2 @@
+var userInput = $("input");
+
