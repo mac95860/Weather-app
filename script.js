@@ -10,75 +10,76 @@ function displayDate() {
 
 }
 
-$("button").on("click", function (event) {
-    event.preventDefault();
 
-    var input = $("#citySearched").val();
-
-    var city = $("<li>");
-    city.addClass("list-group-item");
-    city.attr("data-name", input);
-
-    city.text(input);
-    city.val(input);
-    $("ul").append(city);
-
-    displayWeatherInfo();
-    displayDate();
-})
 
 //--------------------------------------display all weather info-------------------------------------------------------------------
 function displayWeatherInfo() {
 
-    $(".cardHolder").empty();
+    $("button").on("click", function (event) {
+        event.preventDefault();
 
-    var input = $("#citySearched").val();
-    
-    var APIKey = "0246ddd8e1c43f29cf72682d14088ce6";
-    var queryURL = "https://api.openweathermap.org/data/2.5/forecast?q=" + input + "&appid=" + APIKey + "&units=imperial";
+        $(".cardHolder").empty();
 
-    $.ajax({
-        url: queryURL,
-        method: "GET"
-    }).then(function (response) {
-        console.log(response);
-        var lon = response.city.coord.lon;
-        var lat = response.city.coord.lat;
-
-        queryURL = "https://api.openweathermap.org/data/2.5/onecall?lat=" + lat + "&lon=" + lon + "&appid=0246ddd8e1c43f29cf72682d14088ce6&units=imperial";
+        var input = $("#citySearched").val();
+        var city = $("<li>")
+                    .text(input)
+                    .addClass("list-group-item")
+                    .attr("data-name", input);
+        
+        $("ul").append(city);
+        
+        
+        var APIKey = "0246ddd8e1c43f29cf72682d14088ce6";
+        var queryURL = "https://api.openweathermap.org/data/2.5/forecast?q=" + input + "&appid=" + APIKey + "&units=imperial";
 
         $.ajax({
             url: queryURL,
             method: "GET"
         }).then(function (response) {
-
             console.log(response);
+            var lon = response.city.coord.lon;
+            var lat = response.city.coord.lat;
 
-            mainTemp = response.current.temp;
-            todayTemp = $(".temp").text(mainTemp);
-            windSpeed = $(".wind").text(response.current.wind_speed);
-            var indexUV = $(".uvIndex").text(response.current.uvi);
+            queryURL = "https://api.openweathermap.org/data/2.5/onecall?lat=" + lat + "&lon=" + lon + "&appid=0246ddd8e1c43f29cf72682d14088ce6&units=imperial";
 
-            for (var i = 0; i < 5; i++) {
-                var temp = response.list[i].main.temp;
+            $.ajax({
+                url: queryURL,
+                method: "GET"
+            }).then(function (response) {
 
-                var iconCode = response.daily[i].weather.icon;
-                var iconUrl = "http://openweathermap.org/img/wn/" + iconCode + "@2x.png";
-                var weatherIcon = $("#icon").attr('src', iconUrl);
+                console.log(response);
 
-                var newDiv = $("<div>").addClass("weatherCard");
+                mainTemp = response.current.temp;
+                todayTemp = $(".temp").text(mainTemp);
+                windSpeed = $(".wind").text(response.current.wind_speed);
+                var indexUV = $(".uvIndex").text(response.current.uvi);
 
-                var weekDay = response.daily[i].dt;
-                var weekDayDiv = $("<h5>").text(weekDay).appendTo(newDiv);
+                for (var i = 0; i < 5; i++) {
+                    var temp = response.list[i].main.temp;
 
-                var iconDiv = $("<img>").attr('src', iconUrl).appendTo(newDiv);
-                var tempDiv = $("<p>").text(temp).appendTo(newDiv);
+                    var iconCode = response.daily[i].weather.icon;
+                    var iconUrl = "http://openweathermap.org/img/wn/" + iconCode + "@2x.png";
+                    var weatherIcon = $("#icon").attr('src', iconUrl);
 
-                var weather = newDiv.appendTo(".cardHolder");
-            }
-        })
-    });
+                    var newDiv = $("<div>").addClass("weatherCard");
+
+                    var weekDay = response.daily[i].dt;
+                    var weekDayDiv = $("<h5>").text(weekDay).appendTo(newDiv);
+
+                    var iconDiv = $("<img>").attr('src', iconUrl).appendTo(newDiv);
+                    var tempDiv = $("<p>").text(temp).appendTo(newDiv);
+
+                    var weather = newDiv.appendTo(".cardHolder");
+                }
+            })
+        });
+
+    })
+
+    displayDate();
 }
+
+displayWeatherInfo()
 
 //------------------------------------------------display weather info for each city clicked on from list------------------------------
 $(document).on("click", "data-name", displayWeatherInfo);
