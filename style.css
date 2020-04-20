@@ -79,6 +79,34 @@ h2 {
     height: 40%;
 }
 
+h4{
+    
+    margin-bottom: 20px;
+}
+
+#uvIndex{
+    background: red;
+    border-radius: 10px;
+    color: white;
+    padding-left: 10px;
+    padding-right: 10px;
+    margin-left: 5px;
+}
+
+.cardHolder {
+    display: flex;
+    justify-content: space-around;
+}
+
+.weatherCard {
+    margin-left: 25px;
+    border-radius: 10px;
+    box-shadow: 5px 5px 15px 2px grey;
+    text-align: center;
+    font-weight: 400;
+    background: skyblue;
+    color: whitesmoke;
+}
 
 
 
