@@ -10,7 +10,6 @@ $("button").on("click", function (event) {
 //-------------function displaying the date------------------------
 function displayDate(input) {
     var date = moment().format('MMMM Do YYYY');
-    
     $("h2").text(`${input} ${date}`);
 };
 
